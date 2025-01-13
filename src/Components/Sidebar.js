@@ -16,14 +16,17 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import HomeIcon from '@mui/icons-material/Home';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Logo from './assets/images/logo.png'
 
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
+  backgroundColor: 'black',
+  color: 'white',
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -32,6 +35,8 @@ const openedMixin = (theme) => ({
 });
 
 const closedMixin = (theme) => ({
+  backgroundColor: 'black',
+  color: 'white',
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -56,7 +61,7 @@ const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  backgroundColor:'black',
+  backgroundColor: 'black',
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -66,7 +71,7 @@ const AppBar = styled(MuiAppBar, {
       props: ({ open }) => open,
       style: {
         marginLeft: drawerWidth,
-        backgroundColor:'black',
+        backgroundColor: 'black',
         width: `calc(100% - ${drawerWidth}px)`,
         transition: theme.transitions.create(['width', 'margin'], {
           easing: theme.transitions.easing.sharp,
@@ -133,21 +138,36 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
+          <img src={Logo} width={40} height={40} style={{ marginRight: 20 }} />
           <Typography variant="h6" noWrap component="div">
-            Super Admin
+            Users Management System
           </Typography>
+
+          <IconButton sx={{color: 'white', right: 40, position: 'absolute'}} aria-label="Notification Icon">
+            <NotificationsIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? <ChevronRightIcon sx={{color: 'white'}} /> : <ChevronLeftIcon sx={{color: 'white'}} />}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          {['Users Management'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+          {[
+            {
+              name: 'Home', 
+              logo: <HomeIcon />           
+            },
+
+            {
+              name: 'My Profile', 
+              logo: <AccountCircleIcon />       
+            },
+          ].map((text, index) => (
+            <ListItem key={text.name} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={[
                   {
@@ -156,11 +176,11 @@ export default function MiniDrawer() {
                   },
                   open
                     ? {
-                        justifyContent: 'initial',
-                      }
+                      justifyContent: 'initial',
+                    }
                     : {
-                        justifyContent: 'center',
-                      },
+                      justifyContent: 'center',
+                    },
                 ]}
               >
                 <ListItemIcon
@@ -168,28 +188,29 @@ export default function MiniDrawer() {
                     {
                       minWidth: 0,
                       justifyContent: 'center',
+                      color: 'white'
                     },
                     open
                       ? {
-                          mr: 3,
-                        }
+                        mr: 3,
+                      }
                       : {
-                          mr: 'auto',
-                        },
+                        mr: 'auto',
+                      },
                   ]}
                 >
-                 <AccountCircleIcon />
+                  {text.logo}
                 </ListItemIcon>
                 <ListItemText
-                  primary={text}
+                  primary={text.name}
                   sx={[
                     open
                       ? {
-                          opacity: 1,
-                        }
+                        opacity: 1,
+                      }
                       : {
-                          opacity: 0,
-                        },
+                        opacity: 0,
+                      },
                   ]}
                 />
               </ListItemButton>
@@ -197,7 +218,7 @@ export default function MiniDrawer() {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3}}>
         <DrawerHeader />
         <Typography sx={{ marginBottom: 2 }}>
           The Content ...
