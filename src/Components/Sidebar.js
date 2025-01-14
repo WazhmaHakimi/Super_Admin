@@ -16,9 +16,22 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import HomeIcon from '@mui/icons-material/Home';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import GroupsIcon from '@mui/icons-material/Groups';
+import ClassIcon from '@mui/icons-material/Class';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import PersonIcon from '@mui/icons-material/Person';
+import PeopleIcon from '@mui/icons-material/People';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import CastForEducationIcon from '@mui/icons-material/CastForEducation';
+import WalletIcon from '@mui/icons-material/Wallet';
+import EmailIcon from '@mui/icons-material/Email';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import LayersIcon from '@mui/icons-material/Layers';
+import FolderSharedIcon from '@mui/icons-material/FolderShared';
 import Logo from './assets/images/logo.png'
 
 const drawerWidth = 240;
@@ -27,6 +40,22 @@ const openedMixin = (theme) => ({
   width: drawerWidth,
   backgroundColor: 'black',
   color: 'white',
+  '&.MuiDrawer-paper': {
+    width: 240,
+    overflowY: 'auto',
+    '&::-webkit-scrollbar': {
+      width: '7px !important',
+    },
+    '&::-webkit-scrollbar-track': {
+      background: 'black',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: 'white',
+    },
+    '&::-webkit-scrollbar-thumb:hover': {
+      background: '#555',
+    },
+  },
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -37,6 +66,21 @@ const openedMixin = (theme) => ({
 const closedMixin = (theme) => ({
   backgroundColor: 'black',
   color: 'white',
+  '&.MuiDrawer-paper': {
+    overflowY: 'auto',
+    '&::-webkit-scrollbar': {
+      width: '7px !important',
+    },
+    '&::-webkit-scrollbar-track': {
+      background: 'black',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: 'white',
+    },
+    '&::-webkit-scrollbar-thumb:hover': {
+      background: '#555',
+    },
+  },
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -131,14 +175,14 @@ export default function MiniDrawer() {
             edge="start"
             sx={[
               {
-                marginRight: 5,
+                marginRight: 4,
               },
               open && { display: 'none' },
             ]}
           >
             <MenuIcon />
           </IconButton>
-          <img src={Logo} width={40} height={40} style={{ marginRight: 20 }} />
+          <img src={Logo} width={40} height={40} style={{ marginRight: 15 }} />
           <Typography variant="h6" noWrap component="div">
             Users Management System
           </Typography>
@@ -158,13 +202,79 @@ export default function MiniDrawer() {
         <List>
           {[
             {
-              name: 'Home', 
-              logo: <HomeIcon />           
+              name: 'Students', 
+              logo: <AccountCircleIcon />       
             },
 
             {
-              name: 'My Profile', 
-              logo: <AccountCircleIcon />       
+              name: 'Teachers', 
+              logo: <CastForEducationIcon />       
+            },
+
+            {
+              name: 'Subjects', 
+              logo: <AutoStoriesIcon />       
+            },
+
+            {
+              name: 'Classes', 
+              logo: <ClassIcon />       
+            },
+
+            {
+              name: 'Classes Teacher', 
+              logo: <PersonIcon />       
+            },
+
+            {
+              name: 'Attendence', 
+              logo: <EventAvailableIcon />       
+            },
+
+            {
+              name: 'Customers', 
+              logo: <PeopleIcon />       
+            },
+
+            {
+              name: 'Expenses', 
+              logo: <AttachMoneyIcon />       
+            },
+
+            {
+              name: 'Income', 
+              logo: <WalletIcon />       
+            },
+
+            {
+              name: 'Staffs', 
+              logo: <GroupsIcon />       
+            },
+
+            {
+              name: 'Letters', 
+              logo: <EmailIcon />       
+            },
+
+            {
+              name: 'Refferals', 
+              logo: <FolderSharedIcon />       
+            },
+
+
+            {
+              name: 'Pages', 
+              logo: <LayersIcon />       
+            },
+
+            {
+              name: 'Roles', 
+              logo: <HowToRegIcon />       
+            },
+
+            {
+              name: 'Super Admins', 
+              logo: <AdminPanelSettingsIcon />       
             },
           ].map((text, index) => (
             <ListItem key={text.name} disablePadding sx={{ display: 'block' }}>
