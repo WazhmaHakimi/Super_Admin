@@ -33,6 +33,7 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import LayersIcon from '@mui/icons-material/Layers';
 import FolderSharedIcon from '@mui/icons-material/FolderShared';
 import Logo from './assets/images/logo.png'
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -41,7 +42,6 @@ const openedMixin = (theme) => ({
   backgroundColor: 'black',
   color: 'white',
   '&.MuiDrawer-paper': {
-    width: 240,
     overflowY: 'auto',
     '&::-webkit-scrollbar': {
       width: '7px !important',
@@ -151,7 +151,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer() {
+export default function MiniDrawer(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -187,7 +187,7 @@ export default function MiniDrawer() {
             Users Management System
           </Typography>
 
-          <IconButton sx={{color: 'white', right: 40, position: 'absolute'}} aria-label="Notification Icon">
+          <IconButton sx={{ color: 'white', right: 40, position: 'absolute' }} aria-label="Notification Icon">
             <NotificationsIcon />
           </IconButton>
         </Toolbar>
@@ -195,143 +195,168 @@ export default function MiniDrawer() {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon sx={{color: 'white'}} /> : <ChevronLeftIcon sx={{color: 'white'}} />}
+            {theme.direction === 'rtl' ? <ChevronRightIcon sx={{ color: 'white' }} /> : <ChevronLeftIcon sx={{ color: 'white' }} />}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
           {[
             {
-              name: 'Students', 
-              logo: <AccountCircleIcon />       
+              name: 'Students',
+              logo: <AccountCircleIcon />,
+              link: '/students'
             },
 
             {
-              name: 'Teachers', 
-              logo: <CastForEducationIcon />       
+              name: 'Teachers',
+              logo: <CastForEducationIcon />,
+              link: '/teachers'
             },
 
             {
-              name: 'Subjects', 
-              logo: <AutoStoriesIcon />       
+              name: 'Subjects',
+              logo: <AutoStoriesIcon />,
+              link: '/subjects'
             },
 
             {
-              name: 'Classes', 
-              logo: <ClassIcon />       
+              name: 'Classes',
+              logo: <ClassIcon />,
+              link: '/classes'
             },
 
             {
-              name: 'Classes Teacher', 
-              logo: <PersonIcon />       
+              name: 'Classes Teacher',
+              logo: <PersonIcon />,
+              link: '/classesTeachers'
             },
 
             {
-              name: 'Attendence', 
-              logo: <EventAvailableIcon />       
+              name: 'Attendence',
+              logo: <EventAvailableIcon />,
+              link: '/attendence'
             },
 
             {
-              name: 'Customers', 
-              logo: <PeopleIcon />       
+              name: 'Customers',
+              logo: <PeopleIcon />,
+              link: '/customers'
             },
 
             {
-              name: 'Expenses', 
-              logo: <AttachMoneyIcon />       
+              name: 'Expenses',
+              logo: <AttachMoneyIcon />,
+              link: '/expenses'
             },
 
             {
-              name: 'Income', 
-              logo: <WalletIcon />       
+              name: 'Incomes',
+              logo: <WalletIcon />,
+              link: '/incomes'
             },
 
             {
-              name: 'Staffs', 
-              logo: <GroupsIcon />       
+              name: 'Staff',
+              logo: <GroupsIcon />,
+              link: '/staff'
             },
 
             {
-              name: 'Letters', 
-              logo: <EmailIcon />       
+              name: 'Letters',
+              logo: <EmailIcon />,
+              link: '/letters'
             },
 
             {
-              name: 'Refferals', 
-              logo: <FolderSharedIcon />       
+              name: 'Refferals',
+              logo: <FolderSharedIcon />,
+              link: '/refferals'
             },
 
 
             {
-              name: 'Pages', 
-              logo: <LayersIcon />       
+              name: 'Pages',
+              logo: <LayersIcon />,
+              link: '/pages'
             },
 
             {
-              name: 'Roles', 
-              logo: <HowToRegIcon />       
+              name: 'Roles',
+              logo: <HowToRegIcon />,
+              link: '/roles'
             },
 
             {
-              name: 'Super Admins', 
-              logo: <AdminPanelSettingsIcon />       
+              name: 'Super Admins',
+              logo: <AdminPanelSettingsIcon />,
+              link: '/superAdmins'
             },
           ].map((text, index) => (
-            <ListItem key={text.name} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={[
-                  {
-                    minHeight: 48,
-                    px: 2.5,
-                  },
-                  open
-                    ? {
-                      justifyContent: 'initial',
-                    }
-                    : {
-                      justifyContent: 'center',
-                    },
-                ]}
-              >
-                <ListItemIcon
+            <Link to={text.link} 
+            style={{
+              textDecoration: 'none'  
+            }}
+            underline="none"
+            >
+              <ListItem key={text.name} disablePadding sx={{ display: 'block' }}>
+                <ListItemButton
                   sx={[
                     {
-                      minWidth: 0,
-                      justifyContent: 'center',
-                      color: 'white'
+                      minHeight: 48,
+                      px: 2.5,
                     },
                     open
                       ? {
-                        mr: 3,
+                        justifyContent: 'initial',
                       }
                       : {
-                        mr: 'auto',
+                        justifyContent: 'center',
                       },
                   ]}
                 >
-                  {text.logo}
-                </ListItemIcon>
-                <ListItemText
-                  primary={text.name}
-                  sx={[
-                    open
-                      ? {
-                        opacity: 1,
-                      }
-                      : {
-                        opacity: 0,
+                  <ListItemIcon
+                    sx={[
+                      {
+                        minWidth: 0,
+                        justifyContent: 'center',
+                        color: 'white'
                       },
-                  ]}
-                />
-              </ListItemButton>
-            </ListItem>
+                      open
+                        ? {
+                          mr: 3,
+                        }
+                        : {
+                          mr: 'auto',
+                        },
+                    ]}
+                  >
+                    {text.logo}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={text.name}
+                    sx={[
+                      open
+                        ? {
+                          opacity: 1,
+                          color: 'white', 
+                          textDecoration: 'none'
+                        }
+                        : {
+                          opacity: 0,
+                        },
+                    ]}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3}}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Typography sx={{ marginBottom: 2 }}>
-          The Content ...
+          {props.content}
         </Typography>
       </Box>
     </Box>
